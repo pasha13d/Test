@@ -1,0 +1,29 @@
+﻿@model Test.Models.FileUploadViewModel
+
+@{
+    ViewBag.Title = "File Upload";
+}
+<h2 style="background-color:#F2F4F4;color:#17202A; text-align:center; font-style:oblique">File Upload</h2>
+
+<fieldset>
+    <legend style="font-family:Arial Black;color:blue">Upload Here</legend>
+    <form action="" method="post" enctype="multipart/form-data">
+        @if (ViewBag.ResultErrorMessage != null)
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.ResultErrorMessage");
+            };
+            </script>
+
+        }
+        <input type="file" name="file" id="file " />
+        <div>
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+</fieldset>
+
+<footer>
+    @*<p style="color: black; text-align: center; font-style: oblique">© <text>copyright</text></p>*@
+</footer>
