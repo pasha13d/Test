@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Test.Models;
+using Test.Services;
 
 namespace Test
 {
@@ -32,6 +33,8 @@ namespace Test
                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             //appsetting
             services.Configure<FileSettingModel>(Configuration.GetSection("FileSetting"));
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddTransient<FileUploadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

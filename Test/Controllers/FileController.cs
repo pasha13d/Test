@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,18 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Test.Models;
+using Test.Services;
 
 namespace Test.Controllers
 {
     public class FileController : Controller
     {
         private readonly IOptions<FileSettingModel> _fileSettings;
-        public FileController(IOptions<FileSettingModel> fileSettings)
+        private readonly FileUploadService _fileUploadService;
+        public FileController(IOptions<FileSettingModel> fileSettings, FileUploadService fileUploadService)
         {
             _fileSettings = fileSettings;
+            _fileUploadService = fileUploadService;
         }
         //private IHostingEnvironment environment;
         //public FileController(IHostingEnvironment _environment)
@@ -38,9 +42,11 @@ namespace Test.Controllers
             FileUploadViewModel fileUpload = new FileUploadViewModel();
             //Filesize
             fileUpload.FileSize = _fileSettings.Value.FileSize;
-            bool result = fileUpload.UploadUserFile(file);
+            fileUpload.FileType = _fileSettings.Value.FileType;
+            fileUpload.File = file;
+            var result = _fileUploadService.UploadUserFile(fileUpload);
 
-            if (result)
+            if (result.IsSuccess)
             {
                 Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), _fileSettings.Value.Location, "UploadFile"));
                 //Declare path to save uploaded file

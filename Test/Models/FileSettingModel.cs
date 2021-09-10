@@ -9,6 +9,11 @@ namespace Test.Models
     {
         public int FileSize { get; set; }
         public string Location { get; set; }
-        public string[] FileType { get; set; }
+        public FileTypeMap[] FileType { get; set; }
+    }
+    public class FileTypeMap
+    {
+        public string Key { get; set; }
+        public byte[] Value { get; set; }
     }
 }
