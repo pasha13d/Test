@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Test.Models;
 
 namespace Test
 {
@@ -29,6 +30,8 @@ namespace Test
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(
                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            //appsetting
+            services.Configure<FileSettingModel>(Configuration.GetSection("FileSetting"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

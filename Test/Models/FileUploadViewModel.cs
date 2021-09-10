@@ -11,6 +11,7 @@ namespace Test.Models
     {
         public string Message { get; set; }
         public decimal FileSize { get; set; }
+        private static readonly byte[] PDF = { 37, 80, 68, 70, 45, 49, 46 };
         public bool UploadUserFile([FromForm] IFormFile file)
         {
             bool result = false;

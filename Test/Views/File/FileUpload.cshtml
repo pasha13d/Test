@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "File Upload";
 }
-<h2 style="background-color:#F2F4F4;color:#17202A; text-align:center; font-style:oblique">File Upload</h2>
+@*<h2 style="background-color:#F2F4F4;color:#17202A; text-align:center; font-style:oblique">File Upload</h2>*@
+<h2 class="bg-secondary text-white text-center p-1 rounded">File Upload</h2>
 
-<fieldset>
-    <legend style="font-family:Arial Black;color:blue">Upload Here</legend>
+<fieldset class="rounded bg-light p-1">
+    @*<legend style="font-family:Arial Black;color:blue">Upload Here</legend>*@
     <form action="" method="post" enctype="multipart/form-data">
         @if (ViewBag.ResultErrorMessage != null)
         {
@@ -18,9 +19,10 @@
 
         }
         <input type="file" name="file" id="file " />
-        <div>
+        <input type="submit" value="Upload" />
+        @*<div>
             <input type="submit" value="Upload" />
-        </div>
+        </div>*@
     </form>
 </fieldset>
 
