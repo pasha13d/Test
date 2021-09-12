@@ -13,10 +13,10 @@ namespace Test.Services
     {
 
         private byte[] fileByte;
-        public List<KeyValuePair<string, string>> MyProperty { get; set; }
-        private static readonly byte[] PDF = { 37, 80, 68, 70, 45, 49, 46 };
-        private static readonly byte[] DOC = { 208, 207, 17, 224, 161, 177, 26, 225 };
-        private static readonly byte[] TEXT = { 71, 70, 71, 10 };
+        //public List<KeyValuePair<string, string>> MyProperty { get; set; }
+        //private static readonly byte[] PDF = { 37, 80, 68, 70, 45, 49, 46 };
+        //private static readonly byte[] DOC = { 208, 207, 17, 224, 161, 177, 26, 225 };
+        //private static readonly byte[] TEXT = { 71, 70, 71, 10 };
         public FileUploadViewModel UploadUserFile(FileUploadViewModel fileUpload)
         {
             //byte[] fileBytes = System.IO.File.ReadAllBytes(path);
@@ -47,6 +47,7 @@ namespace Test.Services
                 //                    (string.Equals(fileUpload.File.ContentType, "text/plain", StringComparison.OrdinalIgnoreCase) && fileByte.Take(4).SequenceEqual(TEXT)) ||
                 //                    (string.Equals(fileUpload.File.ContentType, "application/msword", StringComparison.OrdinalIgnoreCase) && fileByte.Take(8).SequenceEqual(DOC)) ||
                 //                    string.Equals(fileUpload.File.ContentType, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", StringComparison.OrdinalIgnoreCase);
+                
 
                 var contentType = fileUpload.FileType
                     .Where(m => m.Key.Equals(fileUpload.File.ContentType, StringComparison.OrdinalIgnoreCase) 
@@ -56,7 +57,7 @@ namespace Test.Services
 
                 if (contentType == null)
                 {
-                    fileUpload.Message = "Invalid file extension - uploads word/pdf/excel/txt file only";
+                    fileUpload.Message = "Invalid file extension - uploads word/pdf/excel/txt/jpg/png file only";
                 }
                 else
                 {
@@ -67,7 +68,7 @@ namespace Test.Services
                     }
                     else
                     {
-                        fileUpload.Message = "File Is Successfully Uploaded";
+                        fileUpload.Message = "Successfully Uploaded";
                         fileUpload.IsSuccess = true;
                     }
                 }                
