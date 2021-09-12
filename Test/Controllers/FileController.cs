@@ -44,6 +44,7 @@ namespace Test.Controllers
             fileUpload.FileSize = _fileSettings.Value.FileSize;
             fileUpload.FileType = _fileSettings.Value.FileType;
             fileUpload.File = file;
+            var k = file.ContentType;
             var result = _fileUploadService.UploadUserFile(fileUpload);
 
             if (result.IsSuccess)

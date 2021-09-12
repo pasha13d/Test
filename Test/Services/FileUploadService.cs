@@ -47,7 +47,6 @@ namespace Test.Services
                 //                    (string.Equals(fileUpload.File.ContentType, "text/plain", StringComparison.OrdinalIgnoreCase) && fileByte.Take(4).SequenceEqual(TEXT)) ||
                 //                    (string.Equals(fileUpload.File.ContentType, "application/msword", StringComparison.OrdinalIgnoreCase) && fileByte.Take(8).SequenceEqual(DOC)) ||
                 //                    string.Equals(fileUpload.File.ContentType, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", StringComparison.OrdinalIgnoreCase);
-                
 
                 var contentType = fileUpload.FileType
                     .Where(m => m.Key.Equals(fileUpload.File.ContentType, StringComparison.OrdinalIgnoreCase) 
