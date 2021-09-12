@@ -13,7 +13,7 @@
         <fieldset class="rounded bg-light p-1">
             @*<legend style="font-family:Arial Black;color:blue">Upload Here</legend>*@
             <form action="" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" class="fileMargin" id="file " />
+                <input type="file" name="file" class="fileMargin" id="file" accept="application/pdf, image/jpeg, image/png, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/plain, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
                 <input type="submit" value="Upload" /> <br />
                 @*Message display*@
                 @if (ViewBag.ResultErrorMessage != null)
