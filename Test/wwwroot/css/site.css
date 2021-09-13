@@ -73,9 +73,19 @@ body {
 .fileMargin {
     margin-left: 5px;
 }
-.alertMessage {
-    padding: 10px;
+/*.alertMessage {
+    padding: 10px;*/
     /*background-color: #31B0D5;*/
-    color: #31B0D5;
+    /*color: #31B0D5;
+    margin-top: 5px;
+}*/
+.successMessage {
+    padding: 10px;
+    color: green;
+    margin-top: 5px;
+}
+.errorMessage {
+    padding: 10px;
+    color: red;
     margin-top: 5px;
 }

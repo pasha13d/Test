@@ -21,60 +21,68 @@ namespace Test.Services
         {
             //byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             //FileUploadViewModel fileUpload = new FileUploadViewModel();
-            if (fileUpload.File.Length > 0)
+            if(fileUpload.File != null)
             {
-                using (var ms = new MemoryStream())
+                if (fileUpload.File.Length > 0)
                 {
-                    fileUpload.File.CopyTo(ms);
-                    fileByte = ms.ToArray();
-                }
-            }
-            //bool result = false;
-            fileUpload.IsSuccess = false;
-            try
-            {
-                //var supportedTypes = new[] { "txt", "doc", "docx", "pdf", "xls", "xlsx" };
-                //var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
-                //if (!supportedTypes.Contains(fileExt))
-                //{
-                //    Message = "Invalid file extension - uploads word/pdf/excel/txt file only";  
-                //    return Message;
-                //}
-                //Mime content type for supported files -- pdf, word, excel, text
-                //bool isValidFileType = (string.Equals(fileUpload.File.ContentType, "application/pdf", StringComparison.OrdinalIgnoreCase) && fileByte.Take(7).SequenceEqual(PDF)) ||
-                //                    string.Equals(fileUpload.File.ContentType, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", StringComparison.OrdinalIgnoreCase) ||
-                //                    string.Equals(fileUpload.File.ContentType, "application/vnd.ms-excel", StringComparison.OrdinalIgnoreCase) ||
-                //                    (string.Equals(fileUpload.File.ContentType, "text/plain", StringComparison.OrdinalIgnoreCase) && fileByte.Take(4).SequenceEqual(TEXT)) ||
-                //                    (string.Equals(fileUpload.File.ContentType, "application/msword", StringComparison.OrdinalIgnoreCase) && fileByte.Take(8).SequenceEqual(DOC)) ||
-                //                    string.Equals(fileUpload.File.ContentType, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", StringComparison.OrdinalIgnoreCase);
-
-                var contentType = fileUpload.FileType
-                    .Where(m => m.Key.Equals(fileUpload.File.ContentType, StringComparison.OrdinalIgnoreCase) 
-                    && fileByte.Take(7).ToArray().SequenceEqual(m.Value)
-                    )
-                    .FirstOrDefault();
-
-                if (contentType == null)
-                {
-                    fileUpload.Message = "Invalid file extension - uploads word/pdf/excel/txt/jpg/png file only";
-                }
-                else
-                {
-
-                    if (fileUpload.File.Length > (fileUpload.FileSize * 1024))
+                    using (var ms = new MemoryStream())
                     {
-                        fileUpload.Message = "File size should be upto " + fileUpload.FileSize + "KB";
+                        fileUpload.File.CopyTo(ms);
+                        fileByte = ms.ToArray();
+                    }
+                }
+
+                //bool result = false;
+                fileUpload.IsSuccess = false;
+                try
+                {
+                    //var supportedTypes = new[] { "txt", "doc", "docx", "pdf", "xls", "xlsx" };
+                    //var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
+                    //if (!supportedTypes.Contains(fileExt))
+                    //{
+                    //    Message = "Invalid file extension - uploads word/pdf/excel/txt file only";  
+                    //    return Message;
+                    //}
+                    //Mime content type for supported files -- pdf, word, excel, text
+                    //bool isValidFileType = (string.Equals(fileUpload.File.ContentType, "application/pdf", StringComparison.OrdinalIgnoreCase) && fileByte.Take(7).SequenceEqual(PDF)) ||
+                    //                    string.Equals(fileUpload.File.ContentType, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", StringComparison.OrdinalIgnoreCase) ||
+                    //                    string.Equals(fileUpload.File.ContentType, "application/vnd.ms-excel", StringComparison.OrdinalIgnoreCase) ||
+                    //                    (string.Equals(fileUpload.File.ContentType, "text/plain", StringComparison.OrdinalIgnoreCase) && fileByte.Take(4).SequenceEqual(TEXT)) ||
+                    //                    (string.Equals(fileUpload.File.ContentType, "application/msword", StringComparison.OrdinalIgnoreCase) && fileByte.Take(8).SequenceEqual(DOC)) ||
+                    //                    string.Equals(fileUpload.File.ContentType, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", StringComparison.OrdinalIgnoreCase);
+
+                    var contentType = fileUpload.FileType
+                        .Where(m => m.Key.Equals(fileUpload.File.ContentType, StringComparison.OrdinalIgnoreCase)
+                        && fileByte.Take(7).ToArray().SequenceEqual(m.Value)
+                        )
+                        .FirstOrDefault();
+
+                    if (contentType == null)
+                    {
+                        fileUpload.Message = "Invalid file extension - uploads word/pdf/excel/txt/jpg/png file only";
                     }
                     else
                     {
-                        fileUpload.Message = "Successfully Uploaded";
-                        fileUpload.IsSuccess = true;
+
+                        if (fileUpload.File.Length > (fileUpload.FileSize * 1024))
+                        {
+                            fileUpload.Message = "File size should be upto " + fileUpload.FileSize + "KB";
+                        }
+                        else
+                        {
+                            fileUpload.Message = "Successfully Uploaded";
+                            fileUpload.IsSuccess = true;
+                        }
                     }
-                }                
+                }
+                catch (Exception ex)
+                {
+                    fileUpload.Message = "Upload Container Should Not Be Empty";
+                }
             }
-            catch (Exception ex)
+            else
             {
-                fileUpload.Message = "Upload Container Should Not Be Empty";
+                fileUpload.Message = "Wrong attempt";
             }
             return fileUpload;
         }

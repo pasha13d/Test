@@ -35,4 +35,5 @@ D:\PROJECTS\Test\Test\obj\Debug\netcoreapp3.1\Test.pdb
 D:\PROJECTS\Test\Test\obj\Debug\netcoreapp3.1\Test.genruntimeconfig.cache
 D:\PROJECTS\Test\Test\obj\Debug\netcoreapp3.1\Test.csproj.CopyComplete
 D:\PROJECTS\Test\Test\obj\Debug\netcoreapp3.1\Razor\Views\File\FileUpload.cshtml.g.cs
+D:\PROJECTS\Test\Test\bin\Debug\netcoreapp3.1\web.config
 D:\PROJECTS\Test\Test\obj\Debug\netcoreapp3.1\Test.csprojAssemblyReference.cache

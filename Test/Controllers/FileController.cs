@@ -44,7 +44,7 @@ namespace Test.Controllers
             fileUpload.FileSize = _fileSettings.Value.FileSize;
             fileUpload.FileType = _fileSettings.Value.FileType;
             fileUpload.File = file;
-            var k = file.ContentType;
+
             var result = _fileUploadService.UploadUserFile(fileUpload);
 
             if (result.IsSuccess)
@@ -58,9 +58,12 @@ namespace Test.Controllers
                 {
                     await file.CopyToAsync(stream);
                 }
+                ViewBag.SuccessMessage = fileUpload.Message;
             }
-
-            ViewBag.ResultErrorMessage = fileUpload.Message;
+            else
+            {
+                ViewBag.ResultErrorMessage = fileUpload.Message;
+            }
 
             return View();
         }
